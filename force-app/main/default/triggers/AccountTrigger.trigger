@@ -7,15 +7,15 @@
  **/
 trigger AccountTrigger on Account(before insert, before update) {
   if (Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)) {
-    AccountTriggerHandler.createAccounts(Trigger.new);
-    AccountTriggerHandler.copyShippingAddress();
-    AccountTriggerHandler.restrictDuplicateAccounts();
+    //AccountTriggerHandler.createAccounts(Trigger.new);
+    AccountTriggerHandler.copyShippingAddress(Trigger.new, Trigger.oldMap);
+    /*AccountTriggerHandler.restrictDuplicateAccounts();
     AccountTriggerHandler.restrictNonAdminAccCreate();
     AccountTriggerHandler.restrictAccWithTwoContacts();
     AccountTriggerHandler.restrictAccWithContacts();
-    // AccountTriggerHandler.restrictClosedOppUpdate();
+    AccountTriggerHandler.restrictClosedOppUpdate();
     AccountTriggerHandler.restrictAccwithParentAcc();
-    // AccountTriggerHandler.updateCaseofEmailOrigin();
+    AccountTriggerHandler.updateCaseofEmailOrigin(); */
   }
 
 }
