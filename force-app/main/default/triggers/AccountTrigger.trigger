@@ -19,8 +19,7 @@ trigger AccountTrigger on Account(before insert, before update, before delete) {
     //AccountTriggerHandler.createAccounts(Trigger.new);
     AccountTriggerHandler.copyShippingAddress(Trigger.new, Trigger.oldMap);
     AccountTriggerHandler.restrictDuplicateAccounts(Trigger.new, Trigger.oldMap);
-   /* AccountTriggerHandler.restrictClosedOppUpdate();
-    AccountTriggerHandler.restrictAccwithParentAcc();
+    /*AccountTriggerHandler.restrictAccwithParentAcc();
     AccountTriggerHandler.updateCaseofEmailOrigin(); */
   }
 

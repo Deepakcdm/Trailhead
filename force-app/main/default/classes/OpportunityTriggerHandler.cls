@@ -1,14 +1,21 @@
-public without sharing class OpportunityTriggerHandler {
+/**
+ * @description       : 
+ * @author            : Deepak
+ * @group             : 
+ * @last modified on  : 03-09-2024
+**/
+public with sharing class OpportunityTriggerHandler {
     
-    public static void closeDateBefore(List<Opportunity>oppList){
+    /**
+    * @description 
+    * @author Deepak
+    * @param oppList 
+    **/
+    public static void restrictClosedOppUpdate(List<Opportunity> oppList, Map<Id,Opportunity> oldOppMap){
         for(opportunity opp:oppList){
-            System.debug('The Opportunity Close Date before update is'+opp.CloseDate);
-        }
-    }
-
-    public static void closeDateAfter(List<Opportunity>oppList){
-        for(Opportunity opp:oppList){
-            System.debug('The Opportunity Close Date after update is'+opp.CloseDate);
+            if(oldOppMap.get(opp.Id).isClosed && opp != oldOppMap.get(opp.Id)){
+                opp.addError('Cannot update Closed Opportunities');
+            }
         }
     }
 }
