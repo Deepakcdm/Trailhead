@@ -108,19 +108,13 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictClosedOppUpdate() {
+  public static void restrictAccwithParentAcc(Map<Id,Account> oldAccMap) {
     try {
-    } catch (exception e) {
-      system.debug(e.getMessage());
-    }
-  }
-
-  /**
-   * @description
-   * @author Deepak Kumar | 03-09-2024
-   **/
-  public static void restrictAccwithParentAcc() {
-    try {
+      for(Account acct : oldAccMap.values()){
+        if(acct.parentId!= null){
+          acct.addError('You cannot delete Accounts associated with Parent Account');
+        }
+      }
     } catch (exception e) {
       system.debug(e.getMessage());
     }

@@ -11,16 +11,16 @@ trigger AccountTrigger on Account(before insert, before update, before delete) {
   }
 
   else if(trigger.isBefore && trigger.isDelete){
-    AccountTriggerHandler.restrictAccWithTwoContacts(trigger.oldMap);
-    AccountTriggerHandler.restrictAccWithContacts(trigger.oldMap);
+    AccountTriggerHandler.restrictAccWithTwoContacts(Trigger.oldMap);
+    AccountTriggerHandler.restrictAccWithContacts(Trigger.oldMap);
+    AccountTriggerHandler.restrictAccwithParentAcc(Trigger.oldMap);
   }
   
   else if (Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)) {
     //AccountTriggerHandler.createAccounts(Trigger.new);
     AccountTriggerHandler.copyShippingAddress(Trigger.new, Trigger.oldMap);
     AccountTriggerHandler.restrictDuplicateAccounts(Trigger.new, Trigger.oldMap);
-    /*AccountTriggerHandler.restrictAccwithParentAcc();
-    AccountTriggerHandler.updateCaseofEmailOrigin(); */
+    //AccountTriggerHandler.updateCaseofEmailOrigin(); 
   }
 
 }
