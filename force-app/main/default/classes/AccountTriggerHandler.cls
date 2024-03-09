@@ -74,9 +74,15 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictAccWithTwoContacts() {
+  public static void restrictAccWithTwoContacts(Map<Id,Account> acctsMap) {
     try {
-    } catch (exception e) {
+      Map<Id,Account> acctContactMap = new Map<Id,Account>([Select Id,(Select Id from Contacts) from Account Where Id IN :acctsMap.keySet()]);
+      for(Account acct : acctsMap.values()){
+        if(acctContactMap.containskey(acct.Id) && acctContactMap.get(acct.Id)?.Contacts!= null && acctContactMap.get(acct.Id)?.Contacts?.size() > 2){
+          acct.addError('You cannot delete the Account with more than 2 Child Contacts');
+        }
+      }
+    }catch (exception e) {
       system.debug(e.getMessage());
     }
   }
@@ -85,9 +91,15 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictAccWithContacts() {
+  public static void restrictAccWithContacts(Map<Id,Account> acctsMap) {
     try {
-    } catch (exception e) {
+      Map<Id,Account> acctContactMap = new Map<Id,Account>([Select Id,(Select Id from Contacts) from Account Where Id IN :acctsMap.keySet()]);
+      for(Account acct : acctsMap.values()){
+        if(acctContactMap.containskey(acct.Id) && acctContactMap.get(acct.Id)?.Contacts!= null && acctContactMap.get(acct.Id)?.Contacts?.size() > 0){
+          acct.addError('You cannot delete the Account with Child Contacts');
+        }
+      }
+    }catch (exception e) {
       system.debug(e.getMessage());
     }
   }
