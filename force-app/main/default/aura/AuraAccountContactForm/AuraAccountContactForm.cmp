@@ -1,0 +1,31 @@
+<aura:component>
+    <aura:attribute name="accRecord" type="Account" default="{
+		'sobjectType': 'Account'}" access="public" />
+
+    <b>ACCOUNT DETAILS</b>
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Account Name" required="true" value="{!v.accRecord.Name}"></lightning:input>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Account Description" required="true" value="{!v.accRecord.Description}">
+            </lightning:input>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Phone" required="true" value="{!v.accRecord.Phone}">
+            </lightning:input>
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Company" required="true" value="{!v.accRecord.Company__c}">
+            </lightning:input>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <c:AuraContactFormChildComp></c:AuraContactFormChildComp>
+
+</aura:component>

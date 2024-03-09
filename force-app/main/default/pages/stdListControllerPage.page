@@ -1,0 +1,9 @@
+<apex:page standardController="Account" recordSetVar="accounts">
+    <apex:pageBlock title="Visualforce Page - Standard List Controller">
+        <apex:pageBlockTable value="{!accounts}" var="acc">
+        <apex:Column value="{!acc.Name}"></apex:Column>
+        <apex:column value="{!acc.Phone}"></apex:column>
+        <apex:column value="{!acc.Industry}"></apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:handler name="casestudy" event="c:CaseStudyEvent" action="{! c.casestudy}" />
+    <c:CaseStudyInformer />
+	
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="principal" type="Decimal" description="Captures the Principal Amount"/>
+    <aura:attribute name="interestrate" type="Decimal" description="Captures the Interest rate"/>
+    <aura:attribute name="timeperiod" type="Decimal" description="Captures the Investment Period"/>
+    <aura:attribute name="amount" type="Decimal" description="stores the final amount"/>
+    <lightning:card title="Simple Interst Calculator">
+        <lightning:layout>
+            <lightning:layoutItem size="3">
+                <!-- For Principal Amount -->
+                <lightning:input label="Principal Amount" required="true" aura:id="principal" type="number" value="{!v.principal}" 
+                  min='1' messageWhenRangeUnderflow="Please Enter value greater than zero" messageWhenValueMissing="Please Enter the Principal Amount" placeholder="Enter your value here"/>
+                
+                <!-- For Rate of Interest -->
+                <lightning:input label="Rate of Interest" required="true" aura:id="interestrate" type="number" value="{!v.interestrate}"
+                     min='1'  messageWhenRangeUnderflow="Please Enter value greater than zero" messageWhenValueMissing="Please Enter the Rate of Interest" placeholder="Enter your value here"/>
+                
+                <!-- Time Period -->
+                <lightning:input label="Number of Years" required="true" aura:id="timeperiod" type="number" value="{!v.timeperiod}" 
+                          min='1' messageWhenRangeUnderflow="Please Enter value greater than zero" messageWhenValueMissing="Please Enter the Investment Period" placeholder="Enter your value here"/>
+                
+                <lightning:button label="Calculate Interest" variant="brand" onclick="{!c.calculateInterest}" />
+                <aura:if isTrue="{!v.amount > 0}" >
+               Final Amount: {!v.amount}
+                    </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

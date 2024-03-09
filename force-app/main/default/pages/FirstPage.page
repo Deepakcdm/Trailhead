@@ -1,0 +1,19 @@
+<apex:page StandardController="Account" >
+    <apex:form >
+      <apex:pageblock title="Account information">
+       <apex:pageblockButtons >
+          <apex:commandButton value="Save" action="{!Save}"/>
+           <apex:commandButton value="Cancel" action="{!Cancel}"/>
+          </apex:pageblockButtons>
+          <apex:pageBlockSection title="Information Section" columns="2">
+             <apex:inputfield label="Account Name" Value="{!Account.Name}" required="True"/>
+             <apex:inputfield label="Account Type" Value="{!Account.Type}" required="True"/>
+             <apex:inputfield label="Account Time" Value="{!Account.Time__c}"/>
+              <apex:inputField label="Account Phone" Value="{!Account.Phone}"/>
+              <apex:inputField label="Account Fax" value="{!Account.Fax}"/>
+              <apex:inputField label="Billing State" value="{!Account.BillingState}" required="True"/>
+              <apex:inputField label="Primary Contact" value="{!Account.Primary_Contact__c}"/>
+          </apex:pageBlockSection>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

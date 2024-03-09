@@ -1,0 +1,35 @@
+<apex:page >
+    <!-- Provide compatibility between lightning and VF frameworks by including lightning libraries for VF Page -->
+    <apex:includeLightning />
+    
+    <!-- Represent a placeholder to place lightning component instance which will get created dynamically,probably a div tag -->
+    <div id="lc">
+     </div>
+    
+    <!-- Load Standalone application onto VF page using $Lightning.use() function arguments->
+          1.Name of the Standalone application : Specify along with namespace
+			2.	JavaScript Function which will be invoked automatically once the framework loads the app-->
+    
+    <!-- Create LightningComponent dynamically using $Lightning.createcomponent() function
+     arguments ->
+1. Name of the argument along with namespace
+2.Attribues,if any, in JSON format,if none represent empty()
+3.Place holder id,in this case 'lc'
+4.Optional CallBack function -->
+    
+ <script>
+    $Lightning.use("c:LightningDependency",function(){
+       $Lightning.createComponent("c:Calculator",
+                                 {
+                                  "value1":100,
+                                  "value2":50
+                                     },
+                                  "lc"
+                                  );
+});
+  </script>
+    
+    
+		
+    
+</apex:page>

@@ -1,0 +1,39 @@
+<template>
+    <lightning-layout multiple-rows="true">
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+
+            <lightning-card title='Calculator'>
+                <lightning-input label='Number 1' type="number" class="slds-var-p-around_medium" name="number1"
+                    required="true" ></lightning-input>
+
+                <lightning-input label='Number 2' type="number" class="slds-var-p-around_medium" name="number2"
+                    required="true"></lightning-input>
+
+                    <lightning-input label='Number 3' type="number" class="slds-var-p-around_medium" name="number3"
+                    required="true"></lightning-input>
+
+                <lightning-input label='Result' type="number" value={result} name="Result"
+                    class="slds-var-p-around_medium" disabled="true"></lightning-input>
+
+                <lightning-button-group class="slds-var-p-around_medium" onclick={handleCalculation}>
+                    <lightning-button label="Add" variant="brand" icon-name="utility:add"
+                        class="slds-var-m-around_x-small"></lightning-button>
+
+                    <lightning-button label="Subtract" variant="brand" icon-name="utility:download"
+                        class="slds-var-m-around_x-small"></lightning-button>
+
+                    <lightning-button label="Multiply" variant="brand" icon-name="utility:download"
+                        class="slds-var-m-around_x-small"></lightning-button>
+
+                    <lightning-button label="Divide" variant="brand" icon-name="utility:download"
+                        class="slds-var-m-around_x-small"></lightning-button>
+
+                        <lightning-button label="Reset" variant="destructive" icon-name="utility:delete"
+                        class="slds-var-m-around_x-small" onclick={handleReset}></lightning-button>
+                </lightning-button-group>
+
+            </lightning-card>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,23 @@
+<apex:page StandardController="Case" extensions="WrapperController">
+    <apex:form >
+        <apex:PageMessages ></apex:PageMessages>
+        <apex:PageBlock >
+            <apex:pageBlockButtons >
+                <apex:CommandButton value="Save" action="{!Save}" />
+                <apex:CommandButton value="Cancel" action="{!Cancel}" />
+            </apex:pageBlockButtons>
+            <apex:PageBlockTable title="Open Cases" value="{!OpenCases}" var="c">
+                <apex:column headerValue="Clone">
+                    <input type="radio" name="SelectRadio">
+                           <apex:actionSupport event="onclick" rerender="none">
+                           <apex:param name="id" value="{!c.openCaseList.Id}"/>
+                           </apex:actionSupport>
+                    </input>
+                   </apex:column>
+                <apex:Column HeaderValue="Case Number" value="{!c.openCaseList.CaseNumber}"/>
+                <apex:Column HeaderValue="Status" Value="{!c.OpenCaseList.Status}"/>
+                <apex:Column HeaderValue="CreatedDate" value="{!c.openCaseList.CreatedDate}"/>
+            </apex:PageBlockTable>
+        </apex:PageBlock>
+    </apex:form>
+</apex:page>

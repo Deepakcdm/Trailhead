@@ -1,0 +1,11 @@
+<apex:page standardController="Account" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock title="Account Information">
+            <apex:pageBlockSection title="Information" columns="1">
+                <apex:outputField value="{!Account.Name}"/>
+                <apex:outputField value="[!Account.Phone}"/>
+                <apex:outputField value="{!Account.Industry}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

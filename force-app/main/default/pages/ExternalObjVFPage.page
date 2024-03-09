@@ -1,0 +1,8 @@
+<apex:page standardcontroller="Orders__x">
+<apex:form >
+<apex:pageBlock >
+<apex:PageBlockSection >
+</apex:PageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

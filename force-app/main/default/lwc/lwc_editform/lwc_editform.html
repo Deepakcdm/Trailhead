@@ -1,0 +1,62 @@
+<template>
+    <lightning-record-edit-form object-api-name="Account" onsuccess={handlesuccess}>
+        <lightning-messages>
+        </lightning-messages>
+
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="Name"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="Description"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="ParentId"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="Type"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="Onboarding_Status__c"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-input-field field-name="SLA__c"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-button label="SUBMIT" variant="SUCCESS" class="slds-align_absolute-center">
+            </lightning-button>
+        </lightning-layout>
+
+
+        <!--<lightning-layout multiple-rows="true">
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="Active__c"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="Phone"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="Fax"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="AnnualRevenue"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="Input__c"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input-field field-name="Account_Lead__c"></lightning-input-field>
+            </lightning-layout-item>
+        </lightning-layout>-->
+    </lightning-record-edit-form>
+</template>

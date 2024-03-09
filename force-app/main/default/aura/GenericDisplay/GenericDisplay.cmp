@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:attribute name="attr1" type="String" />
+     <aura:attribute name="attr2" type="String" />
+     <aura:attribute name="attr3" type="String" />
+     <aura:attribute name="sid" type="String" />
+    
+    <tr>
+    <td>{! v.attr1}</td>
+        <td>{! v.attr2}</td>
+        <td>{! v.attr3}</td>
+        <td><lightning:button label="view" onclick="{! c.viewRec}" /></td>
+        <td><lightning:button label="Edit" onclick="{! c.editrec}"/></td>
+    </tr>
+	
+</aura:component>

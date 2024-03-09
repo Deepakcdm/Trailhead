@@ -1,0 +1,12 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="AuraController">
+<aura:attribute name="recordId" type="String"></aura:attribute>
+
+<div class="slds-align_absolute-center">
+<p><b>Are you sure you want to close all Open Cases?</b></p>
+</div>
+
+<div class="slds-text-align_right">
+    <lightning:button label="Cancel" class="slds-m-around_medium" variant="neutral" onclick="{!c.closeModal}"></lightning:button>
+    <lightning:button label="OK" class="slds-m-around_medium" variant="brand" onclick="{!c.closeCases}"></lightning:button>
+</div>
+</aura:component>

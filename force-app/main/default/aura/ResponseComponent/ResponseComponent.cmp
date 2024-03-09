@@ -1,0 +1,8 @@
+<aura:component >
+    <div class="myStyle">
+   <p>Media queries can help with that. 
+    We can add a breakpoint 
+       where certain parts of the design will behave differently on each side of the breakpoint.</p>
+    </div>
+	
+</aura:component>

@@ -1,0 +1,9 @@
+<aura:component >
+    <!-- Register for the Event. Name plays a vital role in this -->
+    <aura:registerEvent name="crime" type="c.CrimeEvent" />
+    
+    <!-- Create a button so that the Notifier can inform handler by clicking on the same -->
+    <lightning:button label="Inform Handler" onclick="{! c.InformHandler}" />
+    
+	
+</aura:component>

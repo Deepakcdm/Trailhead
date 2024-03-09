@@ -1,0 +1,5 @@
+<aura:component >
+    <div class = "container">
+        <lightning:button variant="brand" label="Create Account" title="Brand action" onclick="{! c.handleClick }" />
+    </div>
+</aura:component>

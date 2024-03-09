@@ -1,0 +1,50 @@
+<template>
+    <lightning-record-edit-form object-api-name="Contact" record-type-id="0127F000000Wir0">
+
+        <lightning-messages></lightning-messages>
+        <div>
+            <lightning-icon icon-name="standard:contact"></lightning-icon>  New Contact
+        </div>
+
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+                <lightning-input-field field-name="Salutation" variant="standard"></lightning-input-field>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+                <lightning-input-field field-name="AccountId" variant="standard"></lightning-input-field>
+            </lightning-layout-item>
+            
+            <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="FirstName" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="LastName" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="Phone" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="Email" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="Level__c" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="5" class="slds-m-top_xx-small slds-m-around_small">
+            <lightning-input-field field-name="Company__c" variant="standard"></lightning-input-field>
+        </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows="true">
+            <div class="slds-align_absolute-center">
+            <lightning-button label="Cancel" type="cancel" variant="destructive" class="slds-m-around_small"></lightning-button>
+            <lightning-button label="Submit" type="submit" variant="brand" class="slds-m-around_small"></lightning-button>
+        </div>
+        </lightning-layout>
+    </lightning-record-edit-form>
+</template>

@@ -1,0 +1,22 @@
+<apex:page StandardController="Case">
+    <apex:includeLightning />
+
+    <div id="LcDisplayId"></div> 
+    
+ <script>
+    var id="{!case.Id}";
+    var rtypeid="{!case.RecordTypeId}";
+    
+    $Lightning.use("c:VfApp", function() {
+    $Lightning.createComponent("c:LcForVf",
+    { 
+        recordtypeid:rtypeid,
+        currentUserName : '{!$User.FirstName} {!$User.LastName}' 
+ 	},
+   "LcDisplayId",
+    function(component) {
+        component.set("v.recordtypeid" , rtypeid);
+    });
+ });
+ </script>
+</apex:page>

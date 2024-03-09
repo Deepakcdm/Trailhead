@@ -1,0 +1,53 @@
+<aura:component implements="force:appHostable" >
+    <lightning:tabset >
+        <lightning:tab label="Calculator">
+            <c:Calculator />  
+        </lightning:tab>
+        
+        
+        <lightning:tab label="Contact">
+            <c:ContactForm />  
+        </lightning:tab>
+        
+         <lightning:tab label="ModalDialog">
+            <c:ModalDialog >
+               Welcome to Lightning.........
+                </c:ModalDialog>
+              </lightning:tab>
+   
+        
+        
+        <lightning:tab label="DeckofCards">
+            <c:DeckofCards />
+        </lightning:tab>
+        
+        <lightning:tab label="EventHandler">
+            <c:CrimeEventHandler />
+        </lightning:tab>
+
+<lightning:tab label="LayoutComponent">
+            <c:LayoutComponent />
+        </lightning:tab>
+        
+        <lightning:tab label="Emergency">
+            <c:EmergencyContainer />
+        </lightning:tab>
+        
+        <lightning:tab label="AccountSearch">
+            <c:CaseStudyHandler />
+        </lightning:tab>
+        
+        
+        
+        <lightning:tab label="ResponsiveDesign">
+            <c:ResponseComponent />
+        </lightning:tab>
+        
+               <lightning:tab label="LightningButton">
+            <c:LightningButton />
+        </lightning:tab>
+    </lightning:tabset>
+    
+    
+	
+</aura:component>

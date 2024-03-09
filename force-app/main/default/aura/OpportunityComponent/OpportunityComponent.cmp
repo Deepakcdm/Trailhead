@@ -1,0 +1,47 @@
+<aura:component controller="OpportunityController" extends="c:GenericComponent" implements="force:appHostable">
+    
+    <!-- Define a List Attribute to store opportunities -->
+    <aura:attribute name="opportunitylist"
+                    type="List" />
+    
+    <!-- Define Aura methods so that one controller functions can call another -->
+    <aura:method name="display" action="{! c.displayToast}" />
+    
+    <!-- Define aura:handler for aura:waiting and aura:donewaiting events -->
+    <aura:handler event="aura:waiting" action="{! c.showSpinner}" />
+    <aura:handler event="aura:donewaiting" action="{! c.hideSpinner}" />
+    
+    <!-- Display a Spinner Component -->
+    <lightning:spinner size="large" variant="brand" class="slds-hide" aura:Id="Spinner" />
+    
+    
+    <lightning:button label="Get all Opportunities"
+                      onclick="{! c.getAllops}" />
+    <lightning:button label="Get Won Opportunities"
+                      onclick="{! c.getWonops}" />
+    
+    <!-- Iterate through opportunityList & Display the respective fields from Opportunities -->
+    <table class="slds-table slds-table_bordered" >
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>StageName</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+   
+    <tbody>
+    
+    <aura:iteration items="{! v.opportunitylist}" var="opp">
+     <c:GenericDisplay attr1="{! opp.Name}"
+                       attr2="{! opp.StageName}"                      
+                       attr3="{! opp.Amount}"
+                       sid="{! opp.Id}" />
+            
+
+       
+         </aura:iteration> 
+      </tbody>
+      </table>
+  
+</aura:component>

@@ -1,0 +1,5 @@
+<!--Lightning Component to show the List of 10 Contacts  -->
+<aura:component implements="force:appHostable">
+<aura:attribute name="contacts" type="contact[]"/>
+<aura:attribute name="header" type="String"/>
+</aura:component>

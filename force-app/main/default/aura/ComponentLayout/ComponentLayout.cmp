@@ -1,0 +1,12 @@
+<aura:component>
+    <lightning:layout>
+        <div class="row">
+    <lightning:layoutItem>
+        <lightning:input type="String" name="name" label="Enter the Name" required="true"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem>
+            <lightning:input type="date" name="date" label="Enter the Date"/>
+        </lightning:layoutItem>
+        </div>
+        </lightning:layout>
+</aura:component>

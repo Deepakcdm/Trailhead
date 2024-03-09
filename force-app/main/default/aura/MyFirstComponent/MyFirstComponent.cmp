@@ -1,0 +1,4 @@
+<aura:component >
+Hello Salesforce! This is my First Lightning Component
+    still a long way to go to become Lightning Expert
+</aura:component>

@@ -1,0 +1,37 @@
+<aura:component>
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="First Name" required="true" value="{!v.conRecord.FirstName}" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Last Name" required="true" value="{!v.conRecord.LastName}" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:input label="Email" required="true" value="{!v.conRecord.Email}" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:buttonIcon iconName="utility:add" variant="brand" onclick="{! c.createNewComponent}"
+                alternativeText="Add Contact" title="Add Contact" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:buttonIcon iconName="utility:dash" variant="border-filled" onclick="{! c.deleteComponent}"
+                alternativeText="Remove Contact" title="Remove Contact" />
+        </lightning:layoutItem>
+
+        {!v.body}
+    </lightning:layout>
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small">
+            <lightning:button label="Cancel" variant="neutral" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small">
+            <lightning:button label="Save" variant="brand"></lightning:button>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,13 @@
+<aura:component >
+    <lightning:buttonMenu iconName="utility:collapse_all" onselect="{! c.handleselect}">
+        <lightning:menuItem label="View" value="View" iconName="utility:preview" />
+        <lightning:menuItem label="Edit" value="Edit" iconName="utility:edit" />
+         <lightning:menuItem label="Search" value="Search" iconName="utility:search" />
+         <lightning:menuItem label="Delete" value="Delete" iconName="utility:delete" />
+        </lightning:buttonMenu>
+    
+    <div aura:Id="modalDiv">
+    
+    </div>
+	
+</aura:component>

@@ -1,0 +1,16 @@
+.THIS {
+    
+}
+
+.THIS .myStyle{
+    width : 60%;
+    
+    }
+.THIS .mycolor{
+    font-size : 20px;
+    color : GREEN;
+}
+
+.THIS.myBorder{
+    border : 5px SOLID BLUE;
+}

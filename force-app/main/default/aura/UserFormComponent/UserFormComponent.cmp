@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="todaysDate" type="date"/>
+    <aura:attribute name="age" type="Integer"/>
+    <aura:attribute name="dob" type="date"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:layout>
+    <lightning:layoutItem padding="around-small" size="3">
+    <lightning:input aura:id="inputfields" label="First Name" required="true"/>
+    <lightning:input aura:id="inputfields" label="Last Name" required="true"/>
+    <lightning:input aura:id="dob" type="date" required="true" value="{!v.dob}"
+        max="{!v.todaysDate}" dateStyle="medium" label="Date of Birth" onchange="{!c.calculateAge}"/>
+    </lightning:layoutItem>
+        
+        <lightning:layoutItem padding="around-small" size="3">
+     <lightning:select label="Gender" required="true" aura:id="inputfields">
+        <option value="">choose one...</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </lightning:select>
+            
+    <lightning:select label="Marial Status" required="true" aura:id="inputfields">
+        <option value="">choose one...</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+    </lightning:select>
+  <lightning:input label="Age" value="{!v.age}" disabled="true"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+  <lightning:button class="slds-align_absolute-center" variant="brand" label="Validate" title="Validate" onclick="{! c.validate }" />
+</aura:component>

@@ -1,0 +1,9 @@
+<aura:component >
+    <!-- Register for the event -->
+    <aura:attribute name="AccountInput" type="String" />
+    <aura:registerevent name="casestudy" type="c.CaseStudyEvent" />
+    <!-- Perform users to nortify handlers-->
+    <lightning:input name="input1"  label="input1" value="{! v.AccountInput}" />
+     <lightning:button label="search" onclick="{! c.search}"/>
+	
+</aura:component>

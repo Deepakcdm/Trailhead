@@ -1,0 +1,8 @@
+<aura:component >
+    <c:EmergencyEventNotifier />
+    <c:FireBrigadeEmergencyHandler />
+    <c:PoliceBrigadeEmergencyHandler />
+    <c:AmbulanceBrigadeEmergencyHandler />
+    
+	
+</aura:component>

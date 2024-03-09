@@ -1,0 +1,18 @@
+<apex:page >
+<apex:form >
+<apex:slds />
+<script>
+function uploadFileClick() {
+            var fileInput = $('#fileUpload');
+            fileInput.click()
+</script>
+<tr>
+<td>
+<apex:commandButton styleClass="slds-button slds-button_neutral upload-file-button"
+                                            onClick="uploadFileClick();return false;"
+                                            value="Upload File" style="margin-top: 15px"/>
+                                            </td>
+                                            
+</tr>
+</apex:form>
+</apex:page>

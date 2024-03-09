@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Conditional Rendering" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <lightning-input label="Name"></lightning-input><br></br>
+            <lightning-input type="toggle" label="Account Status" unchecked onchange={renderinfo}></lightning-input>
+            <template if:true={detailsvisible}>
+                <c-lwcrecordform></c-lwcrecordform>
+           <lightning-input type="Date" label="Date of Birth"></lightning-input>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<aura:component access="GLOBAL" >
+ <aura:attribute name="msg"
+                 type="String"
+                 access="GLOBAL" 
+                 default="GM" />
+    <!--Use Curly Bang to refer attributes
+	along with v notation where v denotes view port or value port -->
+    Welcome...{! v.msg}
+</aura:component>

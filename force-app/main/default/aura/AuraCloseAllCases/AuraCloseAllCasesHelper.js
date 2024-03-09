@@ -1,0 +1,5 @@
+({
+    closeAllCases : function() {
+
+    }
+})
