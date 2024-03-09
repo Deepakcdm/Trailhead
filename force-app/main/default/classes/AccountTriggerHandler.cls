@@ -5,19 +5,9 @@
  * @Created on  : 03-09-2024
  **/
 public with sharing class AccountTriggerHandler {
-  /**
-   * @description
-   * @author Deepak Kumar | 03-09-2024
-   * @param accList
-   **/
-  public static void createAccounts(List<Account> accList) {
-    for (Account acct : accList) {
-      acct.ShippingState = acct.BillingState;
-    }
-  }
 
   /**
-   * @description
+   * @description : Map the Changes of Billing Address to Shipping Address
    * @author Deepak Kumar | 03-09-2024
    **/
   public static void copyShippingAddress(List<Account> newAccts,Map<Id, Account> oldAccMap) {
@@ -46,15 +36,34 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictDuplicateAccounts(List<Account> newAccts, Map<Id,Account> oldAccMap) {
+  public static void restrictDuplicateAccounts(List<Account> newAccts) {
     try {
+      Map<String,List<Account>>newacctsMap = new Map<String, List<Account>>();
+      for(Account acct : newAccts){
+         if(!newacctsMap.containsKey(acct.Name)){
+           newacctsMap.put(acct.Name, new List<Account>());
+         }else{
+          newacctsMap.get(acct.Name).add(acct);
+         }
+      }
+
+      Map<String,Account>existingAcctsMap = new Map<String,Account>();
+      for(Account acct : [Select Id,Name from Account Where Name IN :newacctsMap.keySet()]){
+        existingAcctsMap.put(acct.Name, acct);
+      }
+
+      for(Account acc : newAccts){
+        if((newacctsMap.containsKey(acc.Name) && newacctsMap.get(acc.Name)?.size() > 1) || existingAcctsMap.containsKey(acc.Name)){
+          acc.addError('This Account is Duplicate. There is another Account with Same Name');
+        }
+      }
   }catch (exception e) {
       system.debug(e.getMessage());
     }
   }
 
   /**
-   * @description
+   * @description : Restrict the Creaton of Accounts by Non-Admin Users
    * @author Deepak Kumar | 03-09-2024
    **/
   public static void restrictNonAdminAccCreate(List<Account> newAccts) {
@@ -71,7 +80,7 @@ public with sharing class AccountTriggerHandler {
   }
 
   /**
-   * @description
+   * @description : Restrict the Deletion of Accounts which has more than 2 Contacts
    * @author Deepak Kumar | 03-09-2024
    **/
   public static void restrictAccWithTwoContacts(Map<Id,Account> acctsMap) {
@@ -88,7 +97,7 @@ public with sharing class AccountTriggerHandler {
   }
 
   /**
-   * @description
+   * @description : Restrict the Deletion of Accounts which has atleast one Contact
    * @author Deepak Kumar | 03-09-2024
    **/
   public static void restrictAccWithContacts(Map<Id,Account> acctsMap) {
@@ -105,7 +114,7 @@ public with sharing class AccountTriggerHandler {
   }
 
   /**
-   * @description
+   * @description : Restrict the Deletion of Account which is being Child of another Parent Account
    * @author Deepak Kumar | 03-09-2024
    **/
   public static void restrictAccwithParentAcc(Map<Id,Account> oldAccMap) {
