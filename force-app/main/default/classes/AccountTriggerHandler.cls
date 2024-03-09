@@ -46,9 +46,9 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictDuplicateAccounts() {
+  public static void restrictDuplicateAccounts(List<Account> newAccts, Map<Id,Account> oldAccMap) {
     try {
-    } catch (exception e) {
+  }catch (exception e) {
       system.debug(e.getMessage());
     }
   }
@@ -57,9 +57,15 @@ public with sharing class AccountTriggerHandler {
    * @description
    * @author Deepak Kumar | 03-09-2024
    **/
-  public static void restrictNonAdminAccCreate() {
+  public static void restrictNonAdminAccCreate(List<Account> newAccts) {
     try {
-    } catch (exception e) {
+      String currentProfileName = [Select Id,Name from Profile Where Id =:UserInfo.getProfileId()]?.Name;
+      if(currentProfileName != 'System Administrator'){
+        for(Account acct : newAccts){
+          acct.addError('No Non-Admin Profiles are allowed to create an Account');
+        }
+      }
+    }catch (exception e) {
       system.debug(e.getMessage());
     }
   }
