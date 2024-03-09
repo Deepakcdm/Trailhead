@@ -13,9 +13,9 @@ trigger AccountTrigger on Account(before insert, before update) {
     AccountTriggerHandler.restrictNonAdminAccCreate();
     AccountTriggerHandler.restrictAccWithTwoContacts();
     AccountTriggerHandler.restrictAccWithContacts();
-    AccountTriggerHandler.restrictClosedOppUpdate();
+    // AccountTriggerHandler.restrictClosedOppUpdate();
     AccountTriggerHandler.restrictAccwithParentAcc();
-    AccountTriggerHandler.updateCaseofEmailOrigin();
+    // AccountTriggerHandler.updateCaseofEmailOrigin();
   }
 
 }
