@@ -119,15 +119,4 @@ public with sharing class AccountTriggerHandler {
       system.debug(e.getMessage());
     }
   }
-
-  /**
-   * @description
-   * @author Deepak Kumar | 03-09-2024
-   **/
-  public static void updateCaseofEmailOrigin() {
-    try {
-    } catch (exception e) {
-      system.debug(e.getMessage());
-    }
-  }
 }
