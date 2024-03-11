@@ -1,8 +1,8 @@
 /**
- * @description       : 
+ * @description       : Opportunity Object Trigger
  * @author            : Deepak
  * @group             : 
- * @last modified on  : 03-09-2024
+ * @last modified on  : 03-11-2024
 **/
 trigger OpportunityTrigger on Opportunity (before update) {
 

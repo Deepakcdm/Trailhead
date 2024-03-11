@@ -1,8 +1,8 @@
 /**
- * @description       :
+ * @description       : Trigger on Account Object
  * @author            : Deepak Kumar
  * @group             :
- * @last modified on  : 03-09-2024
+ * @last modified on  : 03-11-2024
  **/
 trigger AccountTrigger on Account(before insert, before update, before delete) {
 
