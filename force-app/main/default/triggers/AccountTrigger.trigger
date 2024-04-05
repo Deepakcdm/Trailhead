@@ -2,9 +2,9 @@
  * @description       : Trigger on Account Object
  * @author            : Deepak Kumar
  * @group             :
- * @last modified on  : 03-11-2024
+ * @last modified on  : 04-05-2024
  **/
-trigger AccountTrigger on Account(before insert, before update, before delete) {
+trigger AccountTrigger on Account(before insert, before update, before delete, after insert, after update) {
 
   if(trigger.isBefore && Trigger.isInsert){
     AccountTriggerHandler.restrictNonAdminAccCreate(Trigger.new);
