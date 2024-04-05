@@ -20,5 +20,4 @@ trigger AccountTrigger on Account(before insert, before update, before delete, a
   else if (Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)) {
     AccountTriggerHandler.copyShippingAddress(Trigger.new, Trigger.oldMap);
   }
-
 }
