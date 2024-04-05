@@ -45,4 +45,4 @@ $RECYCLE.BIN/
 **/venv/
 
 # triggers
-**/triggers/*.trigger
+AccountTrigger.trigger
