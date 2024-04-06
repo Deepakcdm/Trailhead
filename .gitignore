@@ -45,4 +45,5 @@ $RECYCLE.BIN/
 **/venv/
 
 # triggers
-**/*.trigger
+**/*.trigger/
+**/triggers/
