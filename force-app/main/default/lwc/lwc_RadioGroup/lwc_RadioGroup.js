@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Deepak
+ * @group             : 
+ * @last modified on  : 05-22-2024
+ * @last modified by  : Deepak
+**/
 import { LightningElement } from 'lwc';
 
 export default class Lwc_RadioGroup extends LightningElement {
@@ -11,7 +18,6 @@ export default class Lwc_RadioGroup extends LightningElement {
     }
 
     renderedCallback() {
-        // Create a style element
         const styleElement = document.createElement('style');
         // Set your CSS rules
         const css = `
