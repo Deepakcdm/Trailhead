@@ -36,5 +36,64 @@ public with sharing class ApexSandboxMap {
         }
         return conPhoneMap;
     }
-    
+
+    /**
+    * @description 
+    * @author Deepak | 10-20-2024 
+    * @param List<Account> accounts 
+    * @return Map<String, Account> 
+    **/
+    public Map<String, Account> phoneToAccount(List<Account> accounts) {
+        //code here
+        Map<String,Account> accPhoneMap = new Map<String,Account>();
+        for(Account acc : accounts){
+            if(!string.isBlank(acc.Phone)){
+                accPhoneMap.put(acc.Phone, acc);
+           }
+        }
+        return accPhoneMap;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 10-20-2024 
+    * @param List<Account> accounts 
+    * @return Map<String, Decimal> 
+    **/
+    public Map<String, Decimal> industrySummary(List<Account> accounts) {
+        //code here
+        Map<String,Decimal> accIndustryMap = new Map<String,Decimal>();
+        for(Account acc : accounts){
+            if(acc.annualRevenue!=null && !string.isBlank(acc.Industry)){
+                if(accIndustryMap.containsKey(acc.Industry)){  
+                    Decimal newRevenue = accIndustryMap.get(acc.Industry) + acc.annualRevenue;
+                    accIndustryMap.put(acc.Industry, newRevenue);
+                }else{
+                accIndustryMap.put(acc.Industry, acc.annualRevenue);
+                }
+            }
+        }
+        return accIndustryMap;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 10-20-2024 
+    * @param List<Case> cases 
+    * @return Map<String, List<Case>> 
+    **/
+    public Map<String, List<Case>> casesByType(List<Case> cases) {
+        //code here
+        Map<String,List<Case>> casesByType = new Map<String,List<Case>>();
+        for(Case newCase : Cases){
+            if(!string.isBlank(newCase.Type)){
+                if(casesByType.containsKey(newCase.Type)){
+                    casesByType.get(newCase.Type).add(newCase);
+                }else{
+                    casesByType.put(newCase.Type,new List<Case>{NewCase});
+                }
+            }
+        }
+        return casesByType;
+    }
 }
