@@ -48,16 +48,15 @@ public with sharing class ApexSandbox {
         //code here
         Boolean isKeyAccount=false;
         if(a.AnnualRevenue!=null && !string.isBlank(a.Industry)){
-            if(a.AnnualRevenue <= 600000 && 'Banking'.equalsIgnoreCase(a.Industry)){
-                isKeyAccount = true;
-            }else if(a.AnnualRevenue <= 800000 && 'Technology'.equalsIgnoreCase(a.Industry)){
-                isKeyAccount = true;
-            }else if(a.AnnualRevenue <= 2000000 && 'Retail'.equalsIgnoreCase(a.Industry)){
-                isKeyAccount = true;
-            }
-            else if(a.AnnualRevenue <= 500000){
-                isKeyAccount = true;
-            }
+           if(a.AnnualRevenue >= 600000 && a.AnnualRevenue < 800000 && 'Banking'.equalsIgnoreCase(a.Industry)){
+            isKeyAccount = true;
+           }else if(a.AnnualRevenue >= 800000 && a.AnnualRevenue < 2000000 && 'Technology'.equalsIgnoreCase(a.Industry)){
+            isKeyAccount = true;
+           }else if(a.AnnualRevenue >= 2000000 && 'Retail'.equalsIgnoreCase(a.Industry)){
+            isKeyAccount=True;
+           }else if(a.AnnualRevenue == 500000){
+            isKeyAccount=True;
+           }
         }
         return isKeyAccount;
     }
@@ -89,18 +88,9 @@ public with sharing class ApexSandbox {
     **/
     public void setParent(Account acc, Contact con, Opportunity opp) {
         //code here
-        if(acc!=null){
-            if(con!=null){
-                con.AccountId=acc.Id;
-                Database.insert(con,AccessLevel.SYSTEM_MODE);
-            }
-
-            if(opp!=null){
-                opp.AccountId=acc.Id;
-                opp.StageName='Prospecting';
-                opp.CloseDate=System.Today();
-                Database.insert(opp,AccessLevel.SYSTEM_MODE);
-            }
+        if(acc?.Id!=null){
+            con.AccountId = acc.Id;
+            opp.AccountId = acc.Id;
         }
     }
 
