@@ -129,4 +129,30 @@ public Map<String,String> getContextUserInformation(){
          }
          return getFieldsValue;
     }
+
+    /**
+    * @description 
+    * @author Deepak | 11-02-2024 
+    * @param List<Account> accounts 
+    * @return List<Account> 
+    **/
+    public List<Account> checkAccounts(List<Account> accounts){
+    // code here 
+    List<Account> returnAccounts = new List<Account>();
+    if(accounts==null || accounts.isEmpty()){
+        throw new IllegalArgumentException('Accounts should not be null');
+    }else{
+        for(Account acc : accounts){
+            if(acc.BillingCity==null){
+                throw new AccountException('Invalid BillingCity');
+            }else{
+                returnAccounts.add(acc);
+            }
+        }
+        return returnAccounts;
+    }
+}
+
+//do not remove the following custom-defined exception
+public class AccountException extends Exception {}
 }
