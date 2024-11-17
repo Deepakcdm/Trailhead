@@ -195,4 +195,25 @@ public static Integer findLargest(List<Integer> nums) {
          average = sum/numbers.size();
         return average.setScale(2);
     }
+
+    /**
+    * @description 
+    * @author Deepak | 11-17-2024 
+    * @param List<Integer> numbers 
+    * @return Integer 
+    **/
+    public static Integer secondLargest(List<Integer> numbers) {
+        //code here
+        List<Integer> filteredNumbers = new List<Integer>();
+        Integer largest = findLargest(numbers);
+
+        for(integer j=0; j<numbers.size();j++){
+            if(numbers[j]!=largest){
+                filteredNumbers.add(numbers[j]);
+            }
+        }
+
+        Integer secondLargest=findLargest(filteredNumbers);
+        return secondLargest;
+    }
 }
