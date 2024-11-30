@@ -1,0 +1,48 @@
+<!--
+  @description       : 
+  @author            : Deepak
+  @group             : 
+  @last modified on  : 11-30-2024
+  @last modified by  : Deepak
+-->
+<template>
+    <lightning-layout size="2" small-device-size="2" medium-device-size="2" large-device-size="2">
+        <lightning-layout-item>
+            <lightning-button label="Open LWC Modal" variant="brand" onclick={openModal}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <template lwc:if={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close" onclick={handleModalClosure}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                </button>
+                <lightning-modal-header label="My Modal Heading"></lightning-modal-header>
+                <lightning-modal-body>
+                    <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat
+                        veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud
+                        elit
+                        officia tempor esse quis. Cillum sunt ad dolore quis
+                        aute consequat ipsum magna exercitation reprehenderit magna. Tempor cupidatat consequat elit
+                        dolor
+                        adipisicing.</p><br>
+                    <p>Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua enim
+                        laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod
+                        pariatur
+                        proident. Eiusmod et adipisicing culpa deserunt nostrud
+                        ad veniam nulla aute est. Labore esse esse cupidatat amet velit id elit consequat minim ullamco
+                        mollit enim excepteur ea.</p>
+                </lightning-modal-body>
+                <lightning-modal-footer>
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                        onclick={handleModalClosure}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={handleModalClosure}>Save</button>
+                </lightning-modal-footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>
