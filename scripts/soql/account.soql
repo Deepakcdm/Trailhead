@@ -4,3 +4,8 @@
 //     SFDX: Execute SOQL Query with Currently Selected Text
 
 Select InterviewLabel,InterviewStatus from FlowInterview
+
+//Query to Fetch the List of PermissionSet which has access to an Sobject.
+SELECT Parent.Name, PermissionsRead, PermissionsCreate,PermissionsDelete,PermissionsEdit,PermissionsModifyAllRecords,PermissionsViewAllRecords
+FROM ObjectPermissions
+WHERE SobjectType = 'Account'
