@@ -5,7 +5,12 @@
 
 Select InterviewLabel,InterviewStatus from FlowInterview
 
-//Query to Fetch the List of PermissionSet which has access to an Sobject.
+//Query to Fetch the List of PermissionSet which has access to Account object.
 SELECT Parent.Name, PermissionsRead, PermissionsCreate,PermissionsDelete,PermissionsEdit,PermissionsModifyAllRecords,PermissionsViewAllRecords
 FROM ObjectPermissions
 WHERE SobjectType = 'Account'
+
+//Query to Fetch the List of PermissionSet which has Read Access to any Field in Account Object
+SELECT SobjectType, Field, PermissionsRead, Parent.Name,Parent.Label
+FROM FieldPermissions
+WHERE PermissionsRead = True and SobjectType='Account' and Parent.IsOwnedByProfile = true and Parent.isCustom=True
