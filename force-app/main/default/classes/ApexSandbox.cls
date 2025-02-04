@@ -133,4 +133,150 @@ public with sharing class ApexSandbox {
         Boolean duplicateContacts = (c1?.Email!=null && c2?.Email!=null && c1.Email == c2.Email) || (c1?.Phone!=null && c2?.Phone!=null && c1.Phone == c2.Phone) ? true : false;
         return duplicateContacts;
     }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param String firstName 
+    * @param String lastName 
+    * @return String 
+    **/
+    public String formatName(String firstName, String lastName) {
+        return firstName+' '+lastName;
+    }
+
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param String firstName 
+    * @param String lastName 
+    * @return String 
+    **/
+    public String formatName1(String firstName, String lastName) {
+        //code here
+        string formatName='';
+        if(string.isNotBlank(firstName ) && string.isNotBlank(lastName)){
+            formatName = lastName+', '+firstName;
+        }else if(string.isNotBlank(lastName) && string.isBlank(firstName)){
+            formatName = lastName;
+        }else if(string.isBlank(lastName) && string.isNotBlank(firstName)){
+            formatName = firstName;
+        }else{
+            return formatName;
+        }
+        return formatName;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param String email 
+    * @return String 
+    **/
+    public String nameFromEmail(String email) {
+        //code here
+        return string.isNotBlank(email) ? (email.substringBefore('.').tolowerCase()).capitalize()+' '+(email.substringBetween('.','@').tolowerCase()).capitalize() : '';
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param Integer n 
+    * @return String 
+    **/
+    public String ageGroup(Integer n) {
+        //code here
+        string ageGroup;
+            if(n==0 || n==1){
+                ageGroup =  'Infant';
+            }else if(n > 1 && n <= 14){
+                ageGroup = 'Child';
+            }else if(n > 14 && n < 22){
+                ageGroup = 'Youth';
+            }else if(n == 22 || n > 22){
+                ageGroup = 'Adult';
+            }
+            return ageGroup;
+     }
+
+     /**
+     * @description 
+     * @author Deepak | 02-03-2025 
+     * @param Decimal total 
+     * @param Integer percent 
+     * @return Decimal 
+     **/
+     public Decimal computeTip(Decimal total, Integer percent) {
+        //code here
+        return total*percent/100;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param Boolean passedExam 
+    * @param Boolean passedAssignments 
+    * @param Boolean passedProject 
+    * @return Boolean 
+    **/
+    public Boolean isPassed(Boolean passedExam, Boolean passedAssignments, Boolean passedProject) {
+        //code here
+        return (passedExam && passedAssignments ) || (passedAssignments && passedProject) || (passedProject && passedExam) ? true : false;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param Integer num 
+    * @return Boolean 
+    **/
+    public Boolean isEndWithZero(Integer num){
+        //code here
+        return Math.Mod(num,10) == 0 ? true : false;
+   }
+
+   /**
+   * @description 
+   * @author Deepak | 02-03-2025 
+   * @param Integer a 
+   * @param Integer b 
+   * @param Integer c 
+   * @return String 
+   **/
+   public String whichTwo(Integer a, Integer b, Integer c) {
+    //code here
+    return a+b==c ? 'c' : b+c==a ? 'a' : c+a == b ? 'b' : '';
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param String plant1 
+    * @param String plant2 
+    * @return Boolean 
+    **/
+    public Boolean companionPlants(String plant1, String plant2) {
+        //code here
+        Map<String, List<String>> companionMap = new Map<String, List<String>>();
+        companionMap.put('lettuce', new List<String>{'cucumbers','onions'});
+        companionMap.put('onions', new List<String>{'carrots', 'tomatoes','lettuce'});
+        companionMap.put('cucumbers', new List<String>{'lettuce'});
+        companionMap.put('carrots', new List<String>{'onions'});
+        companionMap.put('tomatoes', new List<String>{'onions'});
+
+        return companionMap.get(plant1)?.contains(plant2) == true ? true : false;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 02-03-2025 
+    * @param Integer year 
+    * @return Boolean 
+    **/
+    public Boolean isLeapYear(Integer year) {
+        //code here
+        return (Math.Mod(year,4) == 0 && Math.Mod(year,100) != 0) || (Math.Mod(year,4) == 0 && Math.Mod(year,100) == 0 && Math.Mod(year,400) == 0) ? true : false;
+    }
+    
 }
