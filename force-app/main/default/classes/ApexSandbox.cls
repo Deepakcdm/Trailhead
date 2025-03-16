@@ -295,4 +295,21 @@ public with sharing class ApexSandbox {
         }
         return sumToN;
     }
+
+    /**
+    * @description 
+    * @author Deepak | 03-16-2025 
+    * @param Integer num 
+    * @return Boolean 
+    **/
+    public Boolean isPrime(Integer num) {
+        //code here
+        Boolean isPrime=true;
+        for(Integer i=2; i<num ; i++){
+            if(Math.mod(num,i)==0){
+                isPrime= false;
+            }
+        }
+        return isPrime;
+    }
 }
