@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Deepak
  * @group             : 
- * @last modified on  : 10-20-2024
+ * @last modified on  : 03-16-2025
  * @last modified by  : Deepak
 **/
 public with sharing class ApexSandbox {
@@ -278,5 +278,21 @@ public with sharing class ApexSandbox {
         //code here
         return (Math.Mod(year,4) == 0 && Math.Mod(year,100) != 0) || (Math.Mod(year,4) == 0 && Math.Mod(year,100) == 0 && Math.Mod(year,400) == 0) ? true : false;
     }
-    
+
+    /**
+    * @description 
+    * @author Deepak | 03-16-2025 
+    * @param Integer n 
+    * @return Integer 
+    **/
+    public Integer sumToN(Integer n) {
+        //code here
+        Integer sumToN = 0;
+        if(n > 0){
+            for(Integer i=1; i<=n ; i++){
+                sumtoN+=i;
+            }
+        }
+        return sumToN;
+    }
 }
