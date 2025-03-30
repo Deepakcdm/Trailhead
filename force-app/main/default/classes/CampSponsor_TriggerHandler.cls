@@ -71,20 +71,32 @@ public with sharing class CampSponsor_TriggerHandler {
     public static void updateEventGrossRevenue(List<CAMPX__Sponsor__c> newSponsors, Map<Id,CAMPX__Sponsor__c> oldSponsors){
         set<Id> eventIds = new set<Id>();
         for(CAMPX__Sponsor__c sponsor : newSponsors){
-            if((oldSponsors==null || sponsor.CAMPX__Status__c!= oldSponsors.get(sponsor.Id)?.CAMPX__Status__c) && sponsor.CAMPX__Status__c=='Accepted'){
+            if((oldSponsors==null || (oldSponsors!=null && (sponsor.CAMPX__Status__c!= oldSponsors.get(sponsor.Id)?.CAMPX__Status__c || 
+            sponsor.CAMPX__Event__c!= oldSponsors.get(sponsor.Id)?.CAMPX__Event__c)))){
                 eventIds.add(sponsor.CAMPX__Event__c);
+                eventIds.add(oldSponsors?.get(sponsor.Id)?.CAMPX__Event__c);
             }
         }
 
         if(!eventIds.isEmpty()){
             List<CAMPX__Event__c> events = new List<CAMPX__Event__c>();
+            set<Id> updatedEventIds = new set<Id>();
             List<AggregateResult> groupedResults = [Select CAMPX__Event__c,SUM(CAMPX__ContributionAmount__c)contributionAmount FROM CAMPX__Sponsor__c 
             Where CAMPX__Event__c IN :eventIds AND CAMPX__Status__c='Accepted' GROUP BY CAMPX__Event__c];
 
             for(AggregateResult ar : groupedResults){
                 Id eventId = (Id)ar.get('CAMPX__Event__c');
                 Decimal contributionAmt = (Decimal)ar.get('contributionAmount');
-                events.add(new CAMPX__Event__c(Id=eventId, CAMPX__GrossRevenue__c= contributionAmt));
+                if(eventId!=null){
+                    events.add(new CAMPX__Event__c(Id=eventId, CAMPX__GrossRevenue__c= contributionAmt));
+                    eventIds.remove(eventId);
+                }
+            }
+
+               for(Id campEventId : eventIds){
+                if(campEventId!= null){
+                    events.add(new CAMPX__Event__c(Id=campEventId, CAMPX__GrossRevenue__c= 0));
+                }
             }
 
             if(!events.isEmpty()){
