@@ -14,10 +14,14 @@ trigger CampGardenTrigger on CAMPX__Garden__c (before insert,after insert, befor
     if(trigger.isBefore && trigger.isInsert){
         CampGarden_TriggerHandler.initializeGardenFields(Trigger.new);
         CampGarden_TriggerHandler.setManagerStartDate(Trigger.new,null);
+        CampGarden_TriggerHandler.calculateCapacity(Trigger.new,null);
+        CampGarden_TriggerHandler.getHealthIndex(Trigger.new,null);
     }
 
     if(trigger.isBefore && trigger.isUpdate){
         CampGarden_TriggerHandler.setManagerStartDate(Trigger.new,Trigger.oldMap);
+        CampGarden_TriggerHandler.calculateCapacity(Trigger.new,Trigger.oldMap);
+        CampGarden_TriggerHandler.getHealthIndex(Trigger.new,Trigger.oldMap);
     }
 
     if(trigger.isAfter && trigger.isInsert){

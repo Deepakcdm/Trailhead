@@ -111,4 +111,33 @@ public with sharing class CampGarden_TriggerHandler {
             Database.update(reassignTasks);
         }
     }
+
+    /**
+    * @description 
+    * @author Deepak | 03-31-2025 
+    **/
+    public static void calculateCapacity(List<CAMPX__Garden__c> newGardens , Map<Id,CAMPX__Garden__c> oldGardens){
+        for(CAMPX__Garden__c garden : newGardens){
+            Boolean totalPlantCountChanged = oldGardens!=null && garden.CAMPX__Total_Plant_Count__c!= oldGardens.get(garden.Id)?.CAMPX__Total_Plant_Count__c;
+            Boolean maxPlantCountChanged = oldGardens!=null && garden.CAMPX__Max_Plant_Count__c!= oldGardens.get(garden.Id)?.CAMPX__Max_Plant_Count__c;
+            if((oldGardens==null || totalPlantCountChanged || maxPlantCountChanged)){
+                garden.CAMPX__Capacity__c = garden.CAMPX__Total_Plant_Count__c > 0 && garden.CAMPX__Max_Plant_Count__c > 0 ? 
+                (garden.CAMPX__Total_Plant_Count__c/garden.CAMPX__Max_Plant_Count__c)*100 : 0;
+            }
+        }
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-31-2025 
+    **/
+    public static void getHealthIndex(List<CAMPX__Garden__c> newGardens , Map<Id,CAMPX__Garden__c> oldGardens){
+        for(CAMPX__Garden__c garden : newGardens){
+            Boolean totalPlantCountChanged = oldGardens!=null && garden.CAMPX__Total_Plant_Count__c!= oldGardens.get(garden.Id)?.CAMPX__Total_Plant_Count__c;
+            Boolean unhealthPlantCountChanged = oldGardens!=null && garden.CAMPX__Total_Unhealthy_Plant_Count__c!= oldGardens.get(garden.Id)?.CAMPX__Total_Unhealthy_Plant_Count__c;
+            if(oldGardens==null || totalPlantCountChanged || unhealthPlantCountChanged){
+                garden.CAMPX__Health_Index__c = garden.CAMPX__Total_Plant_Count__c > 0 ? ((garden.CAMPX__Total_Plant_Count__c-garden.CAMPX__Total_Unhealthy_Plant_Count__c)/garden.CAMPX__Total_Plant_Count__c)*100 : 0;
+            }
+        }
+    }
 }
