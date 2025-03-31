@@ -3,7 +3,7 @@
  * @author            : Deepak
  * @Created on        : 03-30-2025
  * @Created by        : Deepak
- * @last modified on  : 03-30-2025
+ * @last modified on  : 03-31-2025
  * @last modified by  : Deepak 
  * Modifications Log
  * Ver   Date         Author   Modification
@@ -31,16 +31,84 @@ public with sharing class CampGarden_TriggerHandler {
     * @author Deepak | 03-30-2025 
     * @param List<CAMPX__Garden__c> newGardens 
     **/
-    public static void createTaskForManager(List<CAMPX__Garden__c> newGardens, Map<Id,CAMPX__Garden__c> oldGardens){
+    public static void createTaskForManager(List<CAMPX__Garden__c> newGardens){
         List<Task> managerTasks = new List<Task>();
         for(CAMPX__Garden__c garden : newGardens){
-            if(garden.CAMPX__Manager__c!=null && (oldGardens==null || garden.CAMPX__Manager__c!= oldGardens?.get(garden.Id)?.CAMPX__Manager__c)){
+            if(garden.CAMPX__Manager__c!=null){
                 managerTasks.add(new Task(Subject='Acquire Plants',whatId=garden.Id,OwnerId=garden.CAMPX__Manager__c));
             }
         }
 
         if(!managerTasks.isEmpty()){
             Database.insert(managerTasks);
+        }
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-31-2025 
+    * @param List<CAMPX__Garden__c> newGardens 
+    * @param Map<Id CAMPX__Garden__c> oldGardens 
+    **/
+    public static void deleteManagerTasks(List<CAMPX__Garden__c> newGardens, Map<Id,CAMPX__Garden__c> oldGardens){
+        set<Id> gardenIds = new set<Id>();
+        set<Id> oldMgrIds = new set<Id>();
+        for(CAMPX__Garden__c garden : newGardens){
+            if(garden.CAMPX__Manager__c!= oldGardens.get(garden.Id)?.CAMPX__Manager__c && garden.CAMPX__Manager__c==null){
+                gardenIds.add(garden.Id);
+                oldMgrIds.add(oldGardens.get(garden.Id)?.CAMPX__Manager__c);
+            }
+        }
+
+        if(!oldMgrIds.isEmpty()){
+            List<Task> deleteTasks = new List<Task>();
+            for(Task tsk : [Select Id from Task where OwnerId IN :oldMgrIds AND Subject='Acquire Plants' AND WhatId IN :gardenIds AND Status!= 'Completed']){
+                deleteTasks.add(tsk);
+            }
+
+            Database.delete(deleteTasks);
+        }
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-31-2025 
+    * @param List<CAMPX__Garden__c> newGardens 
+    * @param Map<Id CAMPX__Garden__c> oldGardens 
+    **/
+    public static void setManagerStartDate(List<CAMPX__Garden__c> newGardens, Map<Id,CAMPX__Garden__c> oldGardens){
+        for(CAMPX__Garden__c garden : newGardens){
+            if(oldGardens==null || (oldGardens!=null && garden.CAMPX__Manager__c!= oldGardens.get(garden.Id)?.CAMPX__Manager__c)){
+                garden.CAMPX__Manager_Start_Date__c=garden.CAMPX__Manager__c!=null ? Date.Today() : null;
+            }
+        }
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-31-2025 
+    **/
+    public static void reassignManagerTasks(List<CAMPX__Garden__c> newGardens, Map<Id,CAMPX__Garden__c> oldGardens){
+        Map<String,String> gardenOwnerChangeMap = new Map<String,String>();
+        set<Id> gardenIds = new set<Id>();
+        set<Id> oldMgrIds = new Set<Id>();
+        List<Task> reassignTasks = new List<Task>();
+
+        for(CAMPX__Garden__c garden : newGardens){
+            if(garden.CAMPX__Manager__c!= oldGardens.get(garden.Id)?.CAMPX__Manager__c && garden.CAMPX__Manager__c!=null){
+                gardenOwnerChangeMap.put(garden.Id+'-'+oldGardens.get(garden.Id)?.CAMPX__Manager__c, garden.CAMPX__Manager__c);
+                gardenIds.add(garden.Id);
+                oldMgrIds.add(oldGardens.get(garden.Id)?.CAMPX__Manager__c);
+            }
+        }
+
+        if(!gardenIds.isEmpty()){
+            for(Task tsk : [Select Id,WhatId,OwnerId from Task where WhatId IN :gardenIds AND OwnerId IN :oldMgrIds AND Status!='Completed' AND Subject='Acquire Plants']){
+                if(gardenOwnerChangeMap.containsKey(tsk.WhatId+'-'+tsk.OwnerId)){
+                    reassignTasks.add(new Task(Id=tsk.Id, OwnerId = gardenOwnerChangeMap.get(tsk.WhatId+'-'+tsk.OwnerId)));
+                }
+            }
+            Database.update(reassignTasks);
         }
     }
 }
