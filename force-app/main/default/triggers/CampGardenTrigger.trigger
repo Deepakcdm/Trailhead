@@ -16,12 +16,18 @@ trigger CampGardenTrigger on CAMPX__Garden__c (before insert,after insert, befor
         CampGarden_TriggerHandler.setManagerStartDate(Trigger.new,null);
         CampGarden_TriggerHandler.calculateCapacity(Trigger.new,null);
         CampGarden_TriggerHandler.getHealthIndex(Trigger.new,null);
+        CampGarden_TriggerHandler.restrictBlankValues(Trigger.new);
+        CampGarden_TriggerHandler.restrictNegativeValues(Trigger.new);
+        CampGarden_TriggerHandler.restrictRange(Trigger.new);
     }
 
     if(trigger.isBefore && trigger.isUpdate){
         CampGarden_TriggerHandler.setManagerStartDate(Trigger.new,Trigger.oldMap);
         CampGarden_TriggerHandler.calculateCapacity(Trigger.new,Trigger.oldMap);
         CampGarden_TriggerHandler.getHealthIndex(Trigger.new,Trigger.oldMap);
+        CampGarden_TriggerHandler.restrictBlankValues(Trigger.new);
+        CampGarden_TriggerHandler.restrictNegativeValues(Trigger.new);
+        CampGarden_TriggerHandler.restrictRange(Trigger.new);
     }
 
     if(trigger.isAfter && trigger.isInsert){
