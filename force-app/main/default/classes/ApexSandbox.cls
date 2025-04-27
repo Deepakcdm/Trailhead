@@ -312,4 +312,43 @@ public with sharing class ApexSandbox {
         }
         return isPrime;
     }
+
+    /**
+    * @description 
+    * @author Deepak | 03-16-2025 
+    * @param Integer a 
+    * @param Integer b 
+    * @param Integer c 
+    * @return Boolean 
+    **/
+    public Boolean ascendingOrder(Integer a, Integer b, Integer c) {
+        //code here
+        return a <=b && b<=c ? true : false;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-16-2025 
+    * @param String player1 
+    * @param String player2 
+    * @return Integer 
+    **/
+    public Integer rockPaperScissors(String player1, String player2) {
+        //code here
+        Map<String,String> rockScissorsMap = new Map<String,String>{'rock'=>'scissors','scissors'=>'paper','paper'=>'rock'};
+        return player1 == player2 ? 0 : rockScissorsMap.get(player1)?.equalsIgnoreCase(player2) ? 1 : 2;
+    }
+
+    /**
+    * @description 
+    * @author Deepak | 03-16-2025 
+    * @param String strTime 
+    * @return String 
+    **/
+    public String changeTimeFormat(String strTime) {
+        //code here
+        string changedTimeFormat;
+        
+        return changedTimeFormat;
+    }
 }
