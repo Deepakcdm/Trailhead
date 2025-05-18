@@ -28,26 +28,12 @@ SELECT SobjectType, Field, PermissionsRead, Parent.Name,Parent.Label
 FROM FieldPermissions
 WHERE PermissionsRead = True and SobjectType='Account' and Parent.IsOwnedByProfile = true and Parent.isCustom=True
 
+//Query to Fetch the List of Profiles which has access to the specific field
+Select PermissionsRead, PermissionsEdit, Parent.Label, Parent.Id,Parent.Profile.Name
+From FieldPermissions
+Where Field = 'Account.Active__c' AND Parent.IsOwnedByProfile = TRUE 
 
-// Query to get Permission Sets with Read access to the 'Rating' field on the 'Account' object
-List<String> permissionSetNames = new List<String>();
-List<PermissionSet> pmsets = [Select Id,Label,Name from PermissionSet Where Id IN (Select ParentId from FieldPermissions where SobjectType='Account' AND 
-Field='Account.Rating' AND PermissionsRead=TRUE)];
-
-for(Permissionset pmset: pmsets){
-        permissionSetNames.add(pmset.Label);
-}
-
-System.debug('The Permission set Names --->'+ permissionsetNames);
-
-// Query to get Permission Sets with Edit access to the 'Rating' field on the 'Account' object
-List<String> permissionSetNames = new List<String>();
-List<PermissionSet> pmsets = [Select Id,Label,Name from PermissionSet Where Id IN (Select ParentId from FieldPermissions where SobjectType='Account' AND 
-Field='Account.Rating' AND PermissionsEdit=TRUE)];
-
-for(Permissionset pmset: pmsets){
-        permissionSetNames.add(pmset.Label);
-}
-
-System.debug('The Permission set Names --->'+ permissionsetNames);
-
+//Query to Fetch the List of Permissionsets  which has access to the specific field
+Select PermissionsRead, PermissionsEdit, Parent.Label
+From FieldPermissions
+Where Field = 'Account.Active__c' AND Parent.IsOwnedByProfile = FALSE 
