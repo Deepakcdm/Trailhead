@@ -1,5 +1,17 @@
+/**
+ * @description       : 
+ * @author            : Deepak
+ * @group             : 
+ * @last modified on  : 05-18-2025
+ * @last modified by  : Deepak
+**/
 public without sharing class ContactTriggerHandler {
 
+    /**
+    * @description 
+    * @author Deepak | 05-18-2025 
+    * @param List<Contact> conList 
+    **/
     public static void updateContactsCount(List<Contact>conList){
         Set<id>accIds = new set<Id>();
         Map<Id,List<Contact>>accConMap = new Map<Id,List<Contact>>();
