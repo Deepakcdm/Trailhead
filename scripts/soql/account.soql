@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Deepak
+ * @group             : 
+ * @last modified on  : 05-18-2025
+ * @last modified by  : Deepak
+**/
 // Use .soql files to store SOQL queries.
 // You can execute queries in VS Code by selecting the
 //     query text and running the command:
