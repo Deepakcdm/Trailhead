@@ -2,12 +2,16 @@
  * @description       : Opportunity Object Trigger
  * @author            : Deepak
  * @group             : 
- * @last modified on  : 03-11-2024
+ * @last modified on  : 05-25-2025
 **/
-trigger OpportunityTrigger on Opportunity (before update) {
+trigger OpportunityTrigger on Opportunity (before insert,before update, after insert, after update) {
 
-    if(trigger.isBefore && trigger.isUpdate){
-        OpportunityTriggerHandler.restrictClosedOppUpdate(Trigger.new, Trigger.OldMap);
+    if (Trigger.isBefore && Trigger.isInsert){ 
+        OpportunityTriggerHandler.validateInsert(Trigger.new);
+        OpportunityTriggerHandler.populateAcctName(Trigger.new);
     }
 
+    if(Trigger.isAfter && Trigger.isUpdate){
+        OpportunityTriggerHandler.createRenewalOpportunity(Trigger.New, Trigger.oldMap);
+    }
 }
