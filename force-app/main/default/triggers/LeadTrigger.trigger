@@ -1,5 +1,5 @@
 /**
- * @description       : 
+ * @description       : Lead Trigger
  * @author            : Deepak
  * @group             : 
  * @last modified on  : 05-25-2025
