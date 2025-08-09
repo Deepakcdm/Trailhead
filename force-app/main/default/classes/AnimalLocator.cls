@@ -1,13 +1,6 @@
-/**
- * @description       : 
- * @author            : Deepak
- * @group             : 
- * @last modified on  : 01-05-2025
- * @last modified by  : Deepak
-**/
 public class AnimalLocator
 {
- 
+
   public static String getAnimalNameById(Integer id)
    {
         Http http = new Http();

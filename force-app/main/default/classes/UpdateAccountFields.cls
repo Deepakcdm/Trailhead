@@ -3,7 +3,7 @@ global class UpdateAccountFields implements Database.Batchable<sObject>{
  
  
     global Database.QueryLocator start(Database.BatchableContext BC){
-        String query='Select BillingCity,BillingCountry,(Select MailingCity,MailingCountry from Contact) from Account';
+        String query='Select BillingCity,BillingCountry,(Select MailingCity,MailingCountry from Contacts) from Account';
        return Database.getQueryLocator(query);
     }
  
