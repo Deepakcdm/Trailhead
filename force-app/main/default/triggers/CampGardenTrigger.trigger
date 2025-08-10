@@ -19,6 +19,7 @@ trigger CampGardenTrigger on CAMPX__Garden__c (before insert,after insert, befor
         CampGarden_TriggerHandler.restrictBlankValues(Trigger.new);
         CampGarden_TriggerHandler.restrictNegativeValues(Trigger.new);
         CampGarden_TriggerHandler.restrictRange(Trigger.new);
+        CampGarden_TriggerHandler.setGardenStatus(Trigger.new, null);
     }
 
     if(trigger.isBefore && trigger.isUpdate){
@@ -28,6 +29,7 @@ trigger CampGardenTrigger on CAMPX__Garden__c (before insert,after insert, befor
         CampGarden_TriggerHandler.restrictBlankValues(Trigger.new);
         CampGarden_TriggerHandler.restrictNegativeValues(Trigger.new);
         CampGarden_TriggerHandler.restrictRange(Trigger.new);
+        CampGarden_TriggerHandler.setGardenStatus(Trigger.new, Trigger.oldMap);
     }
 
     if(trigger.isAfter && trigger.isInsert){

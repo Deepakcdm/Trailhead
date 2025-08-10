@@ -139,29 +139,40 @@ public with sharing class AccountTriggerHandler {
 		}
 	}
 
-  /**
-   * @description : Set Created Date to Today for all Accounts
-   * @author Deepak Kumar | 04-09-2024
-   **/
-  public static void setCreatedDate(List<Account> newAccts) {
-      for (Account acct : newAccts) {
-        acct.CreatedDate = System.now().addDays(-100);
-        System.debug('The Account Created Date is --->'+ acct.CreatedDate);
-      }
-    }
+	/**
+	 * @description : Set Created Date to Today for all Accounts
+	 * @author Deepak Kumar | 04-09-2024
+	 **/
+	public static void setCreatedDate(List<Account> newAccts) {
+		for (Account acct : newAccts) {
+			acct.CreatedDate = System.now().addDays(-100);
+			System.debug('The Account Created Date is --->' + acct.CreatedDate);
+		}
+	}
 
 	/**
-	* @description 
-	* @author Deepak | 08-03-2025 
-	* @param List<Account> newAccts 
-	* @param Map<Id Account> oldAcctMap 
-	**/
-	public static void checkFormulaFieldChange(List<Account> newAccts, Map<Id,Account> oldAcctMap){
-		for(Account acct : newAccts){
-			if(oldacctMap == Null || (acct.RecordType_Name__c!= oldAcctMap.get(acct.Id)?.RecordType_Name__c)){
-				System.debug('The New Account Record Type Name is '+ acct.RecordType_Name__c);
-				System.debug('The Old Account Record Type Name is '+ oldAcctMap?.get(acct.Id)?.RecordType_Name__c);
+	 * @description
+	 * @author Deepak | 08-03-2025
+	 * @param List<Account> newAccts
+	 * @param Map<Id Account> oldAcctMap
+	 **/
+	public static void checkFormulaFieldChange(List<Account> newAccts, Map<Id, Account> oldAcctMap) {
+		for (Account acct : newAccts) {
+			if (oldacctMap == null || (acct.RecordType_Name__c != oldAcctMap.get(acct.Id)?.RecordType_Name__c)) {
+				System.debug('The New Account Record Type Name is ' + acct.RecordType_Name__c);
+				System.debug('The Old Account Record Type Name is ' + oldAcctMap?.get(acct.Id)?.RecordType_Name__c);
 			}
 		}
 	}
-  }
+
+	/**
+	 * @description 
+	 * @author Deepak | 08-09-2025
+	 * @param List<Account> accts
+	 **/
+	public static void updateAcctStatusAsync(List<Account> accts) {
+		if (!accts.isEmpty()) {
+			System.enqueueJob(new AccountCreateQueueable(accts));
+		}
+	}
+}
