@@ -146,7 +146,6 @@ public with sharing class AccountTriggerHandler {
 	public static void setCreatedDate(List<Account> newAccts) {
 		for (Account acct : newAccts) {
 			acct.CreatedDate = System.now().addDays(-100);
-			System.debug('The Account Created Date is --->' + acct.CreatedDate);
 		}
 	}
 
@@ -173,6 +172,19 @@ public with sharing class AccountTriggerHandler {
 	public static void updateAcctStatusAsync(List<Account> accts) {
 		if (!accts.isEmpty()) {
 			System.enqueueJob(new AccountCreateQueueable(accts));
+		}
+	}
+
+	/**
+	* @description 
+	* @author Deepak | 08-31-2025 
+	* @param List<Account> accts 
+	**/
+	public static void UpdateDescription(List<Account> accts){
+		for(Account acct : accts){
+			if(string.isBlank(acct.Description) || acct.Description==null){
+				acct.Description = 'No Description Provided';
+			}
 		}
 	}
 }
