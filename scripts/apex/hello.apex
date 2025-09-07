@@ -2,7 +2,7 @@
  * @description       : Anonymous Apex Snippet Changes
  * @author            : Deepak
  * @group             : 
- * @last modified on  : 05-18-2025
+ * @last modified on  : 09-07-2025
  * @last modified by  : Deepak
 **/
 // Use .apex files to store anonymous Apex.
@@ -37,3 +37,5 @@ Where Field = 'Account.Active__c' AND Parent.IsOwnedByProfile = TRUE
 Select PermissionsRead, PermissionsEdit, Parent.Label
 From FieldPermissions
 Where Field = 'Account.Active__c' AND Parent.IsOwnedByProfile = FALSE 
+
+System.debug(Account_Selector.getAccountOpportunities());
