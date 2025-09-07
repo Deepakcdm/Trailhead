@@ -187,4 +187,40 @@ public with sharing class AccountTriggerHandler {
 			}
 		}
 	}
+
+	/**
+	* @description 
+	* @author Deepak | 09-07-2025 
+	* @param String accName 
+	* @param String accPhone 
+	**/
+	public static Id createAccount(String accName, String accPhone){
+		Account acct = new Account(Name=accName, phone = accPhone);
+		insert acct;
+		return acct.Id;
+	}
+
+	/**
+	* @description 
+	* @author Deepak | 09-07-2025 
+	* @return List<Account> 
+	**/
+	public static List<Account> getTechnologyAccounts(){
+		return [Select Id,Name from Account Where Industry='Technology'];
+	}
+
+	/**
+	* @description 
+	* @author Deepak | 09-07-2025 
+	**/
+	public static void createContact(List<Account> accts){
+		List<Contact> contacts = new List<Contact>();
+		for(Account acct : accts){
+			contacts.add(new Contact(AccountId = acct.Id, LastName = acct.Name));
+		}
+
+		if(!contacts.isEmpty()){
+			Database.insert(contacts);
+		}
+	}
 }

@@ -2,7 +2,7 @@
  * @description       : Trigger on Account Object
  * @author            : Deepak Kumar
  * @group             :
- * @last modified on  : 08-31-2025
+ * @last modified on  : 09-07-2025
  **/
 trigger AccountTrigger on Account(before insert, before update, before delete, after insert, after update) {
 	if (Trigger.isBefore && Trigger.isInsert) {
@@ -23,5 +23,6 @@ trigger AccountTrigger on Account(before insert, before update, before delete, a
 
 	if (Trigger.isAfter && Trigger.isInsert) {
 		AccountTriggerHandler.updateAcctStatusAsync(Trigger.new);
+		AccountTriggerHandler.createContact(Trigger.new);
 	}
 }

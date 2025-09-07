@@ -2,48 +2,54 @@
  * @description       :
  * @author            : Deepak
  * @group             :
- * @last modified on  : 08-31-2025
+ * @last modified on  : 09-07-2025
  * @last modified by  : Deepak
  **/
 public without sharing class ContactTriggerHandler {
 	/**
 	 * @description
-	 * @author Deepak | 05-18-2025
-	 * @param List<Contact> conList
+	 * @author Deepak | 08-31-2025
 	 **/
-	public static void updateContactsCount(List<Contact> conList) {
-		Set<id> accIds = new Set<Id>();
-		Map<Id, List<Contact>> accConMap = new Map<Id, List<Contact>>();
-		List<Account> accList = new List<Account>();
-		for (Contact con : conList) {
-			accIds.add(con.AccountId);
-		}
-
-		for (Contact cont : [SELECT Id, AccountId FROM Contact WHERE AccountId IN :accIds]) {
-			if (!accConMap.containsKey(cont.AccountId)) {
-				accConMap.put(cont.AccountId, new List<Contact>{ cont });
-			} else {
-				accConMap.get(cont.AccountId).add(cont);
+	public static void updateBirthDate(List<Contact> newContacts, Map<Id, Contact> oldConMap) {
+		for (Contact cont : newContacts) {
+			if (cont.BirthDate != null && cont.BirthDate != oldConMap.get(cont.Id).Birthdate && cont.BirthDate > System.Today()) {
+				cont.BirthDate = Date.newInstance(2000, 1, 1);
 			}
 		}
-
-		for (Account acc : [SELECT Id, Number_of_Contacts__c FROM Account WHERE Id IN :accConMap.keyset()]) {
-			if (accConMap.containskey(acc.Id)) {
-				acc.Number_of_Contacts__c = accConMap.get(acc.Id).size();
-			}
-		}
-		update accList;
 	}
 
-    /**
-    * @description 
-    * @author Deepak | 08-31-2025 
-    **/
-    public static void updateBirthDate(List<Contact> newContacts, Map<Id,Contact> oldConMap){
-        for(Contact cont : newContacts){
-            if(cont.BirthDate!=null && cont.BirthDate!= oldConMap.get(cont.Id).Birthdate && cont.BirthDate > System.Today()){
-                cont.BirthDate = Date.newInstance(2000,01,01);
-            }
-        }
-    }
+	/**
+	 * @description
+	 * @author Deepak | 09-07-2025
+	 * @param List<Contact> newContacts
+	 **/
+	public static void updateContactsCount(List<Contact> newContacts, Map<Id, Contact> oldContactMap) {
+		set<Id> acctIds = new Set<Id>();
+
+		if (newContacts != null) {
+			for (Contact con : newContacts) {
+				if (con.AccountId != null) {
+					acctIds.add(con.AccountId);
+				}
+			}
+		}
+
+		if (oldContactMap != null) {
+			for (Contact cont : oldContactMap.Values()) {
+				if (cont.accountId != null) {
+					acctIds.add(cont.AccountId);
+				}
+			}
+		}
+
+		if (!acctIds.isEmpty()) {
+			List<AggregateResult> aggregateResults = [SELECT AccountId, Count(Id) contactsCount FROM Contact WHERE AccountId IN :acctIds GROUP BY AccountId];
+
+			List<Account> accts = new List<Account>();
+			for (aggregateResult ar : aggregateResults) {
+				accts.add(new Account(Id = (Id) ar.get('AccountId'), Number_Of_Contacts__c = (Integer) ar.get('contactsCount')));
+			}
+			Database.update(accts);
+		}
+	}
 }
