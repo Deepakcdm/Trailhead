@@ -1,3 +1,10 @@
+<!--
+  @description       : 
+  @author            : Deepak
+  @group             : 
+  @last modified on  : 09-21-2025
+  @last modified by  : Deepak
+-->
 <template>
     <lightning-card title="Account Create Form" style="width:100%">
 
@@ -19,21 +26,27 @@
             <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleSuccess}>
                 <lightning-messages></lightning-messages>
                 <lightning-layout multiple-rows>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="Name"></lightning-input-field>
                     </lightning-layout-item>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="Active__c"></lightning-input-field>
                     </lightning-layout-item>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="AccountSource"></lightning-input-field>
                     </lightning-layout-item>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="AnnualRevenue"></lightning-input-field>
                     </lightning-layout-item>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="Customer_ID__c"></lightning-input-field>
                     </lightning-layout-item>
+
                     <lightning-layout-item size="6" padding="around-small">
                         <lightning-input-field field-name="Date_of_Birth__c"></lightning-input-field>
                     </lightning-layout-item>
