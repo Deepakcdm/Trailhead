@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Account Create Form" style="width:100%">
+
+        <template lwc:if={showSpinner}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:elseif={newAccountCreated}>
+            <p>The Newly Created Account is {accountId}</p>
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button variant="brand" name="redirect" label="Back to Create Account Form"
+                    onclick={handleRedirect}></lightning-button>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <lightning-record-edit-form object-api-name={objectApiName} onsuccess={handleSuccess}>
+                <lightning-messages></lightning-messages>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="Active__c"></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="AccountSource"></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="AnnualRevenue"></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="Customer_ID__c"></lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <lightning-input-field field-name="Date_of_Birth__c"></lightning-input-field>
+                    </lightning-layout-item>
+
+                    <div class="slds-m-top_medium slds-align_absolute-center">
+                        <lightning-button name="'cancel" label="Cancel" onclick={handleReset}
+                            class="slds-p-horizontal_medium"></lightning-button>
+                        <lightning-button variant="brand" type="submit" name="save" label="Create Account"
+                            class="slds-p-horizontal_medium" onsubmit={handleSubmit}></lightning-button>
+                    </div>
+                </lightning-layout>
+            </lightning-record-edit-form>
+        </template>
+    </lightning-card>
+</template>

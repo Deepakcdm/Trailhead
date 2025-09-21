@@ -1,3 +1,10 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-04-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
 <template>
     <lightning-layout multiple-rows="true">
 
@@ -5,12 +12,12 @@
 
             <lightning-card title='Calculator'>
                 <lightning-input label='Number 1' type="number" class="slds-var-p-around_medium" name="number1"
-                    required="true" ></lightning-input>
+                    required="true"></lightning-input>
 
                 <lightning-input label='Number 2' type="number" class="slds-var-p-around_medium" name="number2"
                     required="true"></lightning-input>
 
-                    <lightning-input label='Number 3' type="number" class="slds-var-p-around_medium" name="number3"
+                <lightning-input label='Number 3' type="number" class="slds-var-p-around_medium" name="number3"
                     required="true"></lightning-input>
 
                 <lightning-input label='Result' type="number" value={result} name="Result"
@@ -29,7 +36,7 @@
                     <lightning-button label="Divide" variant="brand" icon-name="utility:download"
                         class="slds-var-m-around_x-small"></lightning-button>
 
-                        <lightning-button label="Reset" variant="destructive" icon-name="utility:delete"
+                    <lightning-button label="Reset" variant="destructive" icon-name="utility:delete"
                         class="slds-var-m-around_x-small" onclick={handleReset}></lightning-button>
                 </lightning-button-group>
 

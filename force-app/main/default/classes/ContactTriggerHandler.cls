@@ -52,4 +52,40 @@ public without sharing class ContactTriggerHandler {
 			Database.update(accts);
 		}
 	}
+
+	/**
+	* @description 
+	* @author Deepak | 09-20-2025 
+	* @param List<Contact> newContacts 
+	* @param Map<Id Contact> oldContacts 
+	**/
+	public static void restrictDuplicateContacts(List<Contact> newContacts, Map<Id,Contact> oldContacts){
+		Map<Id, List<String>> accConMap = new Map<Id, List<String>>();
+
+		for(Contact con : newContacts){
+			if(String.isNotBlank(con.Email) && (oldContacts==null || (oldContacts!=null && con.Email!= oldContacts.get(con.Id).Email))){
+				if(!accConMap.containskey(con.AccountId)){
+					accConMap.put(con.AccountId, new List<String>{con.Email});
+				}else{
+					accConMap.get(con.AccountId).add(con.Email);
+				}
+			}
+		}
+
+		if(!accConMap.isEmpty()){
+			for(Contact con : [Select Id,AccountId, Email from Contact Where AccountId IN :accConMap.keySet()]){
+				if(!accConMap.containskey(con.AccountId)){
+					accConMap.put(con.AccountId, new List<String>{con.Email});
+				}else{
+					accConMap.get(con.AccountId).add(con.Email);
+				}
+			}
+		}
+
+		for(Contact con : newContacts){
+			if(accConMap.containskey(con.AccountId) && accConMap.get(con.AccountId).size() > 1){
+				con.addError('Duplicate Email Exist for the Contact - ' + con.Email);
+			}
+		}
+	}
 }

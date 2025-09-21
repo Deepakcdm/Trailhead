@@ -74,4 +74,23 @@ public with sharing class OpportunityTriggerHandler {
             Database.insert(oppts);
         }
     }
+
+    /**
+    * @description 
+    * @author Deepak | 09-20-2025 
+    * @param List<Opportunity> newOpps 
+    * @param Map<Id Opportunity> oldOpps 
+    **/
+    public static void updateAccountRatingHot(List<Opportunity> newOpps, Map<Id,Opportunity> oldOpps){
+        List<Account> hotAccts = new List<Account>();
+        for(Opportunity opp : newOpps){
+            if(opp.StageName=='Closed Won' && (oldOpps==null || (oldOpps!=null && opp.StageName!= oldOpps.get(opp.Id).StageName))){
+                hotAccts.add(new Account(Id=opp.AccountId, Rating='Hot'));
+            }
+        }
+
+        if(!hotAccts.isEmpty()){
+            Database.update(hotAccts);
+        }
+    }
 }

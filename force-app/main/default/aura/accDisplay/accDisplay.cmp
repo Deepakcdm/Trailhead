@@ -1,3 +1,10 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-28-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
 <aura:component implements="force:hasRecordId,flexipage:availableForRecordHome">
  <aura:attribute name="record"
                     type="Object"

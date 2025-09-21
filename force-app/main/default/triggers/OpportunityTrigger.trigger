@@ -9,9 +9,11 @@ trigger OpportunityTrigger on Opportunity (before insert,before update, after in
     if (Trigger.isBefore && Trigger.isInsert){ 
         OpportunityTriggerHandler.validateInsert(Trigger.new);
         OpportunityTriggerHandler.populateAcctName(Trigger.new);
+        OpportunityTriggerHandler.updateAccountRatingHot(Trigger.new,null);
     }
 
     if(Trigger.isAfter && Trigger.isUpdate){
         OpportunityTriggerHandler.createRenewalOpportunity(Trigger.New, Trigger.oldMap);
+        OpportunityTriggerHandler.updateAccountRatingHot(Trigger.new, Trigger.oldMap);
     }
 }
