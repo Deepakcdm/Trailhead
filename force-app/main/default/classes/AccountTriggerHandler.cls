@@ -165,7 +165,7 @@ public with sharing class AccountTriggerHandler {
 	}
 
 	/**
-	 * @description 
+	 * @description
 	 * @author Deepak | 08-09-2025
 	 * @param List<Account> accts
 	 **/
@@ -176,50 +176,50 @@ public with sharing class AccountTriggerHandler {
 	}
 
 	/**
-	* @description 
-	* @author Deepak | 08-31-2025 
-	* @param List<Account> accts 
-	**/
-	public static void UpdateDescription(List<Account> accts){
-		for(Account acct : accts){
-			if(string.isBlank(acct.Description) || acct.Description==null){
+	 * @description
+	 * @author Deepak | 08-31-2025
+	 * @param List<Account> accts
+	 **/
+	public static void UpdateDescription(List<Account> accts) {
+		for (Account acct : accts) {
+			if (string.isBlank(acct.Description) || acct.Description == null) {
 				acct.Description = 'No Description Provided';
 			}
 		}
 	}
 
 	/**
-	* @description 
-	* @author Deepak | 09-07-2025 
-	* @param String accName 
-	* @param String accPhone 
-	**/
-	public static Id createAccount(String accName, String accPhone){
-		Account acct = new Account(Name=accName, phone = accPhone);
+	 * @description
+	 * @author Deepak | 09-07-2025
+	 * @param String accName
+	 * @param String accPhone
+	 **/
+	public static Id createAccount(String accName, String accPhone) {
+		Account acct = new Account(Name = accName, phone = accPhone);
 		insert acct;
 		return acct.Id;
 	}
 
 	/**
-	* @description 
-	* @author Deepak | 09-07-2025 
-	* @return List<Account> 
-	**/
-	public static List<Account> getTechnologyAccounts(){
-		return [Select Id,Name from Account Where Industry='Technology'];
+	 * @description
+	 * @author Deepak | 09-07-2025
+	 * @return List<Account>
+	 **/
+	public static List<Account> getTechnologyAccounts() {
+		return [SELECT Id, Name FROM Account WHERE Industry = 'Technology'];
 	}
 
 	/**
-	* @description 
-	* @author Deepak | 09-07-2025 
-	**/
-	public static void createContact(List<Account> accts){
+	 * @description
+	 * @author Deepak | 09-07-2025
+	 **/
+	public static void createContact(List<Account> accts) {
 		List<Contact> contacts = new List<Contact>();
-		for(Account acct : accts){
+		for (Account acct : accts) {
 			contacts.add(new Contact(AccountId = acct.Id, LastName = acct.Name));
 		}
 
-		if(!contacts.isEmpty()){
+		if (!contacts.isEmpty()) {
 			Database.insert(contacts);
 		}
 	}
