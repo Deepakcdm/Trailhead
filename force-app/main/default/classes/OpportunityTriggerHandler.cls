@@ -2,7 +2,7 @@
  * @description       :
  * @author            : Deepak
  * @group             :
- * @last modified on  : 01-04-2026
+ * @last modified on  : 01-25-2026
  **/
 public with sharing class OpportunityTriggerHandler {
 	/**
@@ -85,6 +85,41 @@ public with sharing class OpportunityTriggerHandler {
 
 		if (!hotAccts.isEmpty()) {
 			Database.update(hotAccts);
+		}
+	}
+
+	/**
+	* @description : Create Task for High Value Opportunity
+	* @author Deepak | 01-25-2026 
+	* @param List<Opportunity> newOpps 
+	**/
+	public static void createHighValueOpptTask(List<Opportunity> newOpps){
+		set<Id> accIds = new set<Id>();
+		List<Opportunity> highValueOpps = new List<Opportunity>();
+		for(Opportunity oppt : newOpps) {
+			if(Oppt.accountId!= null && ApexConstants.OPPT_PROSPECT.equalsIgnoreCase(oppt.StageName)) {
+				accIds.add(oppt.accountId);
+				highValueOpps.add(oppt);
+			}
+		}
+
+		if(!accIds.isEmpty() && !highValueOpps.isEmpty()){
+			Map<Id,Account> accMap = new Map<Id,Account>([Select Id,Owner.Name from Account Where Id IN :accIds]);
+			List<Task> highValueTasks = new List<Task>();
+
+			for(Opportunity oppt : highValueOpps) {
+				Task opptTask = new Task(
+					OwnerId = accMap.get(oppt.AccountId)?.OwnerId,
+					Subject = 'Follow up Task  - '+ oppt.Name,
+					WhatId = oppt.Id,
+					ActivityDate = System.Today().addDays(10)
+				);
+				highValueTasks.add(OpptTask);
+			}
+
+			if(!highValueTasks.isEmpty()) {
+				Database.insert(highValueTasks);
+			}
 		}
 	}
 }
