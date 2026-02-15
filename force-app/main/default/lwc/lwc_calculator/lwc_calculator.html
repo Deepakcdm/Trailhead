@@ -12,19 +12,23 @@
 
             <lightning-card>
                 <p class="slds-align_absolute-center slds-p-top_medium cardTitle"><b>Calculator</b></p>
-                <lightning-input label='Number 1' type="number" class="slds-var-p-around_large" name="number1"
+                <lightning-input label='Number 1' type="number"
+                    class="slds-var-p-horizontal_large slds-p-vertical_small" name="number1"
                     required="true"></lightning-input>
 
-                <lightning-input label='Number 2' type="number" class="slds-var-p-around_large" name="number2"
+                <lightning-input label='Number 2' type="number"
+                    class="slds-var-p-horizontal_large slds-p-vertical_small" name="number2"
                     required="true"></lightning-input>
 
-                <lightning-input label='Number 3' type="number" class="slds-var-p-around_large" name="number3"
+                <lightning-input label='Number 3' type="number"
+                    class="slds-var-p-horizontal_large slds-p-vertical_small" name="number3"
                     required="true"></lightning-input>
 
                 <lightning-input label='Result' type="number" value={result} name="Result"
-                    class="slds-var-p-around_large" disabled="true"></lightning-input>
+                    class="slds-var-p-horizontal_large slds-p-vertical_small" disabled="true"></lightning-input>
 
-                <lightning-button-group class="slds-var-p-around_small" onclick={handleCalculation}>
+                <lightning-button-group class="slds-var-p-horizontal_large slds-p-vertical_small"
+                    onclick={handleCalculation}>
                     <lightning-button label="Add" variant="brand" icon-name="utility:add"
                         class="slds-var-m-around_xx-small"></lightning-button>
 
