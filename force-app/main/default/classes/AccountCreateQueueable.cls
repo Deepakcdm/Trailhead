@@ -2,7 +2,7 @@
  * @description       : Sample Queueable Class to check the Max Limit of Queueable Jobs in Queued Status
  * @author            : Deepak
  * @group             :
- * @last modified on  : 01-04-2026
+ * @last modified on  : 04-23-2026
  * @last modified by  : Deepak
  **/
 public with sharing class AccountCreateQueueable implements Queueable {
@@ -45,7 +45,7 @@ public with sharing class AccountCreateQueueable implements Queueable {
 		}
 
 		if (endIndex < accounts.size()) {
-			System.enqueueJob(new AccountCreateQueueable(accounts, startIndex));
+			System.enqueueJob(new AccountCreateQueueable(accounts, endIndex));
 		}
 	}
 }
